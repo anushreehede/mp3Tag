@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 	s.append(t);
 	std::cout<<s<<"\n";*/
 	//system("fpcalc -raw ")
-	std::ifstream fpcalc;
+	/*std::ifstream fpcalc;
 	fpcalc.open("finger.txt");
 	if(!fpcalc)
 	{
@@ -77,15 +77,16 @@ int main(int argc, char* argv[])
 	}
 	std::cout<<duration<<"\n"<<fpt<<"\n";
 	fpcalc.close();
-
+  */
 	
-   int length = atoi(duration.c_str());
+   //int length = atoi(duration.c_str());
    //int16_t *fingerp = (int16_t)atoi(fpt.c_str());
    ChromaprintContext *ctx;
    char *fp;
    const int sample_rate = 44100;
    const int num_channels = 2;
-  
+
+   // reading the raw audio file  
   size_t valueCount = sample_rate * num_channels;
 	FILE *_file;
     int16_t *_data = NULL;
@@ -94,12 +95,15 @@ int main(int argc, char* argv[])
     if(_file == NULL) exit(1);
     fread(_data, sizeof(_data[0]), valueCount, _file);
     fclose(_file);
+
+    // new chromaprint object
    ctx = chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT);
    if(ctx == NULL)
    {
    	printf("Cannot continue :O\n");
    	exit(1);
    }
+   int length = chromaprint_get_item_duration(ctx);
    chromaprint_start(ctx, sample_rate, num_channels);
    //while (has_more_data) {
        int i = chromaprint_feed(ctx, _data, length);
