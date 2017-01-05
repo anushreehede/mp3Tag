@@ -1,18 +1,29 @@
-def results(results, num):
-	print "hello"
+def results(results, field):
+	#print "hello"
+	#first = True
+	#print results
 	for score, rid, title, artist in results:
-		if num == 0:
-			score = score*100
-			newscore = str(score)
-			#newscore = "{:.2f}".format(score) 
-			print newscore
-			return newscore  
-		if num == 1:
-			print rid
-			return rid
-		if num == 2:
+		"""if first:
+			first = False 
+		else:
+		    print() """  
+		print field
+		#print results[field]
+		if field == 0:
+		    score = score*100
+		    newscore = str(score) 
+		    print newscore
+		    return newscore  
+		if field == 1:
+		    print rid
+	        return rid
+		if field == 2:
 			print title
+			print "two"
 			return title
-		if num == 3:
-			#print artist
+		if field == 3:
+			print artist
+			print "three"
 			return artist
+
+

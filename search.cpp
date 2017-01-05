@@ -64,40 +64,44 @@ int main(int argc, char* argv[])
         PyErr_Print();
         exit(-1);
     }
-    pArgs1 = PyTuple_New(2);
+    pArgs1 = PyTuple_New(2); // changed from 2
     PyTuple_SetItem(pArgs1, 0, pResults);
-    //std::cout<<"@#$%^&\n";
-    for(int i=0; i<4; ++i)
+    /*PyObject *f1, *f2, *f3, *f4;
+    f1 = PyString_FromString("score");
+    f2 = PyString_FromString("rid");
+    f3 = PyString_FromString("title");
+    f4 = PyString_FromString("artist");
+    */
+    PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(0));
+    pValue = PyObject_CallObject(pFunc1, pArgs1); 
+    if(pValue == NULL)
     {
-    	switch(i)
-    	{
-    		case 0: PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(0));
-    		        pValue = PyObject_CallObject(pFunc1, pArgs1); 
-                    score = PyString_AsString(pValue);
-                    /*if(score == NULL)
-                        std::cout<<"yoyo\n";*/
-                    //std::cout<<score<<"\n";
-    		        break;// call get_results, send 0 as param and store return in score
-    		case 1: PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(1));
-    		        rid = PyString_AsString(PyObject_CallObject(pFunc1, pArgs1)); 
-                    /*if(rid == NULL)
-                        std::cout<<"yoyo\n";*/
-    		        break;// call get_results, send 1 as param and store return in rid
-    		case 2: PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(2));
-    		        title = PyString_AsString(PyObject_CallObject(pFunc1, pArgs1)); 
-                    /*if(title == NULL)
-                        std::cout<<"yoyo\n";*/
-    		        break;// call get_results, send 2 as param and store return in title
-    		case 3: PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(3));
-    		        artist = PyString_AsString(PyObject_CallObject(pFunc1, pArgs1)); 
-                    if(artist == NULL)
-                        std::cout<<"null\n";
-    		        break;// call get_results, send 3 as param and store return in artist
-    		default: break;
-    	}
+        std::cout<<"Found\n";
+        exit(-1);
     }
+    score = PyString_AsString(pValue);
+    if(score == NULL)
+      std::cout<<"yoyo\n";
+    
+    PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(1));
+    rid = PyString_AsString(PyObject_CallObject(pFunc1, pArgs1)); 
+    if(rid == NULL)
+    std::cout<<"yoyo\n";
 
-    std::cout<<score<<"\n"<<rid<<"\n"<<title<<"\n"<<artist<<"\n";
+    PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(2));
+    title = PyString_AsString(PyObject_CallObject(pFunc1, pArgs1)); 
+    if(title == NULL)
+        std::cout<<"yoyo\n";
+    else std::cout<<title<<"$^&*\n";
+
+    PyTuple_SetItem(pArgs1, 1, PyLong_FromLong(3));
+    artist = PyString_AsString(PyObject_CallObject(pFunc1, pArgs1)); 
+    if(artist == NULL)
+        std::cout<<"null artist\n";
+    else std::cout<<artist<<"$^&*\n";
+
+    //std::cout<<"\n"<<score<<"\n"<<rid<<"\n"<<title<<"\n"<<artist<<"\n";
+
     Py_Finalize();
     
 	return 0;
