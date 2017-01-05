@@ -8,5 +8,12 @@ sudo pip install mutagen
 git clone https://github.com/acoustid/chromaprint.git
 
 ### Compiling and running
-g++ -Wall search.cpp -I/usr/include/python2.7 -lpython2.7  
-./a.out mp3_file
+
+ffmpeg -i mp3_file -f s16le -acodec pcm_s16le output.raw  
+
+g++ -Wall search1.cpp -I/path/chromaprint/src -L/path/chromaprint/src/src -libchromaprint
+
+./a.out
+
+
+
