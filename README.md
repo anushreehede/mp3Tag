@@ -1,19 +1,25 @@
 ### Installing mid3v2
 
 sudo apt-get install python-pip  
-sudo pip install mutagen
+sudo pip install mutagen 
+
+### Install curl 
+
+sudo apt-get install libcurl14-gnutls-dev 
 
 ### Install chromaprint separately
 
 git clone https://github.com/acoustid/chromaprint.git
 
+### Install jsoncpp 
+
+git clone https://github.com/open-source-parsers/jsoncpp.git 
+
 ### Compiling and running
 
-ffmpeg -i mp3_file -f s16le -acodec pcm_s16le output.raw  
+g++ search1.cpp -lcurl -ljsoncpp -std=c++11
 
-g++ -Wall search1.cpp -I/path/chromaprint/src -L/path/chromaprint/src/src -libchromaprint
-
-./a.out
+./a.out mp3File.mp3
 
 
 
