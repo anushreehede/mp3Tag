@@ -21,5 +21,9 @@ g++ search1.cpp -lcurl -ljsoncpp -std=c++11
 
 ./a.out mp3File.mp3
 
+### Note 
+
+Include other libraries when necessary
+
 
 
